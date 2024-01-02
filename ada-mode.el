@@ -345,9 +345,9 @@ begin
 This is also used for <<..>> labels"
   :type 'integer :group 'ada)
 
-(defcustom ada-language-version 'ada95
-  "Ada language version; one of `ada83', `ada95', `ada2005'."
-  :type '(choice (const ada83) (const ada95) (const ada2005)) :group 'ada)
+(defcustom ada-language-version 'ada2012
+  "Ada language version; one of `ada83', `ada95', `ada2005', `ada2012'."
+  :type '(choice (const ada83) (const ada95) (const ada2005) (const ada2012)):group 'ada)
 
 (defcustom ada-move-to-declaration nil
   "Non-nil means `ada-move-to-start' moves to the subprogram declaration,
@@ -483,6 +483,11 @@ Used to define `ada-*-keywords'.")
   (defconst ada-2005-string-keywords
     '("interface" "overriding" "synchronized")
     "List of keywords new in Ada 2005.
+Used to define `ada-*-keywords.'")
+
+  (defconst ada-2012-string-keywords
+    '("some")
+    "List of keywords new in Ada 2012.
 Used to define `ada-*-keywords.'"))
 
 (defvar ada-ret-binding nil
@@ -579,7 +584,17 @@ This variable defines several rules to use to align different lines.")
 		    ada-95-string-keywords) t) "\\>"))
   "Regular expression matching Ada 2005 keywords.")
 
-(defvar ada-keywords ada-2005-keywords
+(defconst ada-2012-keywords
+  (eval-when-compile
+    (concat "\\<" (regexp-opt
+		   (append
+		    ada-2012-string-keywords
+		    ada-2005-string-keywords
+		    ada-83-string-keywords
+		    ada-95-string-keywords) t) "\\>"))
+  "Regular expression matching Ada 2012 keywords.")
+
+(defvar ada-keywords ada-2012-keywords
   "Regular expression matching Ada keywords.")
 ;; FIXME: make this customizable
 
@@ -1330,7 +1345,9 @@ the file name."
                     ((eq ada-language-version 'ada95)
                      (setq ada-keywords ada-95-keywords))
                     ((eq ada-language-version 'ada2005)
-                     (setq ada-keywords ada-2005-keywords)))
+                     (setq ada-keywords ada-2005-keywords))
+                    ((eq ada-language-version 'ada2012)
+                     (setq ada-keywords ada-2012-keywords)))
 
               (if ada-auto-case
                   (ada-activate-keys-for-case)))
@@ -5191,8 +5208,8 @@ Return nil if no body was found."
 		"generic" "if" "in" "interface" "is" "limited" "loop" "mod" "not"
 		"null" "or" "others" "overriding" "private" "protected" "raise"
 		"range" "record" "rem" "renames" "requeue" "return" "reverse"
-		"select" "separate" "synchronized" "tagged" "task" "terminate"
-		"then" "until" "when" "while" "with" "xor") t)
+		"select" "separate" "some" "synchronized" "tagged" "task"
+		"terminate" "then" "until" "when" "while" "with" "xor") t)
 	     "\\>")
      ;;
      ;; Anything following end and not already fontified is a body name.
