@@ -1297,7 +1297,9 @@ the file name."
   (set (make-local-variable 'add-log-current-defun-function)
        'ada-which-function)
 
-  (easy-menu-add ada-mode-menu ada-mode-map)
+  ;;  Required by XEmacs
+  (when (featurep 'xemacs)
+    (easy-menu-add ada-mode-menu ada-mode-map))
 
   (set (make-local-variable 'skeleton-further-elements)
        '((< '(backward-delete-char-untabify
