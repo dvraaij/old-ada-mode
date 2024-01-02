@@ -577,7 +577,7 @@ This variable defines several rules to use to align different lines.")
 		    ada-2005-string-keywords
 		    ada-83-string-keywords
 		    ada-95-string-keywords) t) "\\>"))
-  "Regular expression matching Ada2005 keywords.")
+  "Regular expression matching Ada 2005 keywords.")
 
 (defvar ada-keywords ada-2005-keywords
   "Regular expression matching Ada keywords.")
