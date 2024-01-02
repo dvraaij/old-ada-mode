@@ -4094,7 +4094,7 @@ Assumes point to be at the end of a statement."
 (defun ada-looking-at-semi-private ()
   "Return t if looking at the start of a private section in a package.
 Return nil if the private is part of the package name, as in
-'private package A is...' (this can only happen at top level)."
+\\='private package A is...\\=' (this can only happen at top level)."
   (save-excursion
     (and (looking-at "\\<private\\>")
 	 (not (looking-at "\\<private[ \t]*\\(package\\|generic\\)"))
