@@ -319,7 +319,7 @@ CROSS-PREFIX is the prefix to use for the `gnatls' command."
                                    "."
 				 (buffer-substring-no-properties
 				  (point)
-				  (point-at-eol))))
+				  (line-end-position))))
 		  (forward-line 1))
 
 		;;  Object path
@@ -333,7 +333,7 @@ CROSS-PREFIX is the prefix to use for the `gnatls' command."
                                    "."
 				 (buffer-substring-no-properties
 				  (point)
-				  (point-at-eol))))
+				  (line-end-position))))
 		  (forward-line 1))
 		)
 	    (kill-buffer nil))))
@@ -1798,7 +1798,7 @@ Information is extracted from the ali file."
     (beginning-of-line)
     (if declaration-found
 	(let ((current-line (buffer-substring
-			     (point) (point-at-eol))))
+			     (point) (line-end-position))))
 	  (save-excursion
 	    (forward-line 1)
 	    (beginning-of-line)

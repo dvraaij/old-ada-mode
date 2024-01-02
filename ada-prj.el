@@ -192,7 +192,7 @@ One item per line should be found in the file."
       (widen)
       (goto-char (point-min))
       (while (not (eobp))
-	(setq line (buffer-substring-no-properties (point) (point-at-eol)))
+	(setq line (buffer-substring-no-properties (point) (line-end-position)))
 	(cl-pushnew line list :test #'equal)
 	(forward-line 1))
       (kill-buffer nil)
@@ -567,7 +567,7 @@ Parameters WIDGET-MODIFIED, EVENT match :notify for the widget."
       ;;  variables
       (momentary-string-display
        (concat "*****Help*****\n" text "\n**************\n")
-       (point-at-bol 2)))))
+       (line-beginning-position 2)))))
 
 (defun ada-prj-show-value (widget _widget-modified event)
   "Show the current field value in WIDGET.

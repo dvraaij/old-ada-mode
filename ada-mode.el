@@ -2444,7 +2444,7 @@ and the offset."
       (if (and ada-indent-is-separate
 	       (save-excursion
 		 (goto-char (match-end 0))
-		 (ada-goto-next-non-ws (point-at-eol))
+		 (ada-goto-next-non-ws (line-end-position))
 		 (looking-at "\\<abstract\\>\\|\\<separate\\>")))
 	  (save-excursion
 	    (ada-goto-stmt-start)
@@ -2551,7 +2551,7 @@ and the offset."
 		       (forward-line -1)
 		       (beginning-of-line)
 		       (while (and (not pos)
-				   (search-forward "--" (point-at-eol) t))
+				   (search-forward "--" (line-end-position) t))
 			 (unless (ada-in-string-p)
 			   (setq pos (point))))
 		       pos))
@@ -2570,7 +2570,7 @@ and the offset."
      ((and (= (char-after) ?#)
 	   (equal ada-which-compiler 'gnat)
 	   (looking-at "#[ \t]*\\(if\\|els\\(e\\|if\\)\\|end[ \t]*if\\)"))
-      (list (point-at-bol) 0))
+      (list (line-beginning-position) 0))
 
      ;;--------------------------------
      ;;   starting with ')' (end of a parameter list)
@@ -4013,7 +4013,7 @@ Point is moved at the beginning of the SEARCH-RE."
                   (funcall search-func search-re limit 1))
         (setq begin (match-beginning 0))
         (setq end (match-end 0))
-        (setq parse-result (parse-partial-sexp (point-at-bol) (point)))
+        (setq parse-result (parse-partial-sexp (line-beginning-position) (point)))
         (cond
          ;;
          ;; If inside a string, skip it (and the following comments)
@@ -4238,7 +4238,7 @@ of the region.  Otherwise, operate only on the current line."
 (defun ada-untab-hard ()
   "Indent current line to previous tab stop."
   (interactive)
-  (indent-rigidly (point-at-bol) (point-at-eol) (- 0 ada-indent)))
+  (indent-rigidly (line-beginning-position) (line-end-position) (- 0 ada-indent)))
 
 
 ;; ------------------------------------------------------------
@@ -5252,7 +5252,7 @@ Use \\[widen] to go back to the full visibility for the buffer."
       (widen)
       (forward-line 1)
       (ada-previous-procedure)
-      (setq end (point-at-bol))
+      (setq end (line-beginning-position))
       (ada-move-to-end)
       (end-of-line)
       (narrow-to-region end (point))
