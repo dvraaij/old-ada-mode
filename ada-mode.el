@@ -350,7 +350,8 @@ This is also used for <<..>> labels"
   :type '(choice (const ada83) (const ada95) (const ada2005)) :group 'ada)
 
 (defcustom ada-move-to-declaration nil
-  "Non-nil means `ada-move-to-start' moves to the subprogram declaration, not to `begin'."
+  "Non-nil means `ada-move-to-start' moves to the subprogram declaration,
+not to `begin'."
   :type 'boolean :group 'ada)
 
 (defcustom ada-popup-key '[down-mouse-3]
@@ -1364,7 +1365,8 @@ the file name."
 
 (defun ada-save-exceptions-to-file (file-name)
   "Save the casing exception lists to the file FILE-NAME.
-Casing exception lists are `ada-case-exception' and `ada-case-exception-substring'."
+Casing exception lists are `ada-case-exception' and
+ `ada-case-exception-substring'."
   (find-file (expand-file-name file-name))
   (erase-buffer)
   (mapc (lambda (x) (insert (car x) "\n"))
@@ -4110,7 +4112,8 @@ Return nil if the private is part of the package name, as in
 
 
 (defun ada-in-paramlist-p ()
-  "Return t if point is inside the parameter-list of a declaration, but not a subprogram call or aggregate."
+  "Return t if point is inside the parameter-list of a declaration,
+but not a subprogram call or aggregate."
   (save-excursion
     (and
      (ada-search-ignore-string-comment "(\\|)" t nil t)

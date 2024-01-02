@@ -1053,7 +1053,8 @@ existing buffer `*gnatfind*', if there is one."
 
 ;; ----- Identifier Completion --------------------------------------------
 (defun ada-complete-identifier (pos)
-  "Try to complete the identifier around POS, using compiler cross-reference information."
+  "Try to complete the identifier around POS, using compiler cross-reference
+information."
   (interactive "d")
   (ada-require-project-file)
 
